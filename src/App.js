@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Feed from "./Feed";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [messageHistory, setMessageHistory] = useState([]);
+    const [lastMessage, setLastMessage] = useState([]);
+
+    useEffect(() => {
+        lastMessage && setMessageHistory((prev) => prev.concat(lastMessage));
+    }, [lastMessage]);
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <Feed setMessages={(data) => setLastMessage(data)} />
+                <div>
+                    {messageHistory ? (
+                        <ul>
+                            {messageHistory.map((message, idx) => (
+                                <li key={idx}>{message}</li>
+                            ))}
+                        </ul>
+                    ) : null}
+                </div>
+            </header>
+        </div>
+    );
 }
 
 export default App;
