@@ -1,3 +1,5 @@
+This is a working code example of how to use socket.io server with react socket.io-client
+
 # Stating Socket.io server
 
 Server can be accessed at `localhost:4001`
